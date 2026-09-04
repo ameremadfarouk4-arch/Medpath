@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedPath — Study Platform for Medical Students</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&family=Zilla+Slab:wght@500;600&family=Tajawal:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&family=Zilla+Slab:wght@500;600&family=Tajawal:wght@400;500;700&display=swap"></noscript>
+<style>
+  :root{
+    --bg: #0B0E14;
+    --surface: #131A24;
+    --surface-2: #0F141C;
+    --ink: #E8ECF1;
+    --ink-soft: #92A0AF;
+    --blue: #3B7BF0;
+    --blue-soft: #1B2E4D;
+    --line: #212A38;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', Tahoma, Arial, sans-serif;
+    line-height:1.7;
+  }
+  .display{ font-family:'Fraunces', Georgia, serif; }
+  .code{ font-family:'Zilla Slab', Georgia, serif; letter-spacing:0.01em; }
+  .ar{
+    font-family:'Tajawal', Tahoma, Arial, sans-serif;
+    color:var(--ink-soft);
+    direction:rtl;
+    unicode-bidi:embed;
+  }
+  a{color:inherit;}
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 6vw;
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:22px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .logo span{color:var(--blue);}
+  nav a{
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:15px;
+    margin-inline-start:28px;
+  }
+  nav a:hover{color:var(--ink);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:96px 6vw 64px;
+    max-width:900px;
+  }
+  .hero h1{
+    font-size:clamp(34px, 5vw, 58px);
+    line-height:1.25;
+    margin:0 0 24px;
+    color:var(--ink);
+    font-weight:900;
+  }
+  .hero .underline{
+    display:block;
+    width:96px;
+    height:4px;
+    background:var(--blue);
+    border-radius:2px;
+    margin:22px 0 26px;
+  }
+  .hero p{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:60ch;
+    margin:0 0 34px;
+  }
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:14px 26px;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:600;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--blue); color:#F5F8FF;}
+  .btn-primary:hover{background:#5A93F5;}
+  .btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
+
+  /* ---------- Index strip ---------- */
+  .index-strip{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:16px 6vw;
+    display:flex;
+    gap:36px;
+    flex-wrap:wrap;
+    font-family:'Zilla Slab', serif;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Sections ---------- */
+  section{padding:72px 6vw;}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head .code{font-size:14px; color:var(--blue); display:block; margin-bottom:10px;}
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-size:clamp(26px,3.2vw,36px);
+    color:var(--ink);
+    margin:0 0 14px;
+    font-weight:700;
+  }
+  .section-head p{color:var(--ink-soft); margin:0; font-size:16px;}
+
+  /* subject list */
+  .subjects{
+    max-width:820px;
+    border-top:1px solid var(--line);
+  }
+  details{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+  }
+  summary{
+    list-style:none;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:20px;
+    cursor:pointer;
+    font-size:19px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary .meta{
+    font-family:'Zilla Slab', serif;
+    font-size:13px;
+    font-weight:500;
+    color:var(--blue);
+    white-space:nowrap;
+  }
+  summary .plus{
+    font-family:'Zilla Slab', serif;
+    font-size:20px;
+    color:var(--blue);
+    min-width:20px;
+    text-align:center;
+  }
+  details[open] summary .plus{transform:rotate(45deg); display:inline-block;}
+  details p{
+    color:var(--ink-soft);
+    font-size:16px;
+    max-width:66ch;
+    margin:16px 0 0;
+  }
+
+  /* coming soon cards */
+  .roadmap{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    max-width:820px;
+  }
+  .roadmap .card{
+    background:var(--surface);
+    padding:26px;
+  }
+  .roadmap .card .tag{
+    font-family:'Zilla Slab', serif;
+    font-size:12px;
+    color:var(--blue);
+  }
+  .roadmap .card h3{
+    font-size:17px;
+    margin:10px 0 8px;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .roadmap .card p{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* subscribe */
+  .subscribe{
+    background:var(--blue-soft);
+    color:var(--ink);
+    border-radius:10px;
+    padding:52px 6vw;
+    margin:0 6vw 72px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:24px;
+    border:1px solid var(--line);
+  }
+  .subscribe h3{font-family:'Fraunces', serif; font-size:24px; margin:0 0 8px; font-weight:700;}
+  .subscribe p{margin:0; color:var(--ink-soft); max-width:44ch; font-size:15px;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:30px 6vw;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:640px){
+    .cta-row{flex-direction:column;}
+    .subscribe{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#top">Med<span>Path</span></a>
+  <nav>
+    <a href="#subjects">Subjects</a>
+    <a href="#roadmap">Coming next</a>
+    <a href="#subscribe">Contact</a>
+  </nav>
+</header>
+
+<div id="top" class="hero">
+  <h1 class="display">
+    Study material that actually comes from inside the classroom
+    <span class="underline"></span>
+  </h1>
+  <p>
+    MedPath is a study platform built by a medical student, for medical students —
+    clear summaries, organized notes, and question banks for first-year subjects.
+  </p>
+  <p class="ar" style="font-size:16px; margin-top:-20px;">
+    منصة تلخيصات ومحتوى دراسي لطلاب كليات الطب، مبنية من طالب طب لطلاب طب.
+  </p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#subjects">Browse subjects</a>
+    <a class="btn btn-ghost" href="#subscribe">Get notified about new material</a>
+  </div>
+</div>
+
+<div class="index-strip">
+  <span>ANAT 101 — Anatomy <span class="ar">(التشريح)</span></span>
+  <span>PHYS 101 — Physiology <span class="ar">(الفسيولوجي)</span></span>
+  <span>HIST 101 — Histology <span class="ar">(الهستولوجي)</span></span>
+  <span>BIOC 101 — Biochemistry <span class="ar">(الكيمياء الحيوية)</span></span>
+</div>
+
+<section id="subjects">
+  <div class="section-head">
+    <span class="code">01 — Available now</span>
+    <h2 class="display">What's on MedPath today</h2>
+    <p>Starting with first-year subjects, more added as we go.</p>
+    <p class="ar" style="font-size:15px; margin-top:6px;">المواد المتاحة دلوقتي — بداية بمواد السنة الأولى</p>
+  </div>
+
+  <div class="subjects">
+    <details open>
+      <summary>
+        Anatomy — Anatomical Position &amp; Directional Terms
+        <span class="meta code">ANAT 101</span>
+        <span class="plus">+</span>
+      </summary>
+      <p>
+        Before reading any anatomical description, you need the standard
+        anatomical position as your reference: body upright, facing forward,
+        arms at the sides with palms facing forward. From this position come
+        the core direction terms — superior/inferior, anterior/posterior,
+        medial/lateral (relative to the midline), and proximal/distal
+        (relative to where a limb attaches to the body). These terms show up
+        in every anatomy topic after this one, so getting comfortable with
+        them early saves a lot of time later.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        Physiology — The Principle of Homeostasis
+        <span class="meta code">PHYS 101</span>
+        <span class="plus">+</span>
+      </summary>
+      <p>
+        Homeostasis is the body's ability to keep its internal environment
+        relatively stable — temperature, blood sugar, pH — despite constant
+        changes around it. The main mechanism behind this is the negative
+        feedback loop: when a variable like temperature rises above its
+        normal range, the body triggers a response that brings it back down
+        (like sweating), and the reverse happens when it drops too low.
+        Almost every system in the body runs on this principle, so
+        understanding it early makes every system after it easier to follow.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        Histology — The Four Basic Tissue Types
+        <span class="meta code">HIST 101</span>
+        <span class="plus">+</span>
+      </summary>
+      <p>
+        The human body is built from just four basic tissue types, and every
+        organ is a combination of them in different proportions: epithelial
+        tissue covers surfaces and lines cavities, connective tissue supports
+        and binds other tissues (like bone and blood), muscle tissue is
+        responsible for movement, and nervous tissue carries signals. When
+        you study any organ later, it helps to ask which of these tissues
+        it's made of — that alone makes its function easier to predict.
+      </p>
+    </details>
+
+    <details>
+      <summary>
+        Biochemistry — The Four Major Macromolecules
+        <span class="meta code">BIOC 101</span>
+        <span class="plus">+</span>
+      </summary>
+      <p>
+        The human body depends on four main groups of large molecules:
+        carbohydrates (a fast energy source), lipids (long-term energy
+        storage and cell membrane building blocks), proteins (building
+        tissue and carrying out functions like enzymes), and nucleic acids —
+        DNA and RNA (storing and transmitting genetic information). Every
+        biochemistry topic after this is really a deeper look into one of
+        these four, so keeping this map in mind gives you something to come
+        back to.
+      </p>
+    </details>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="section-head">
+    <span class="code">02 — Coming next</span>
+    <h2 class="display">What we're building next</h2>
+    <p>Priority right now is covering the rest of first-year subjects, then expanding from there.</p>
+    <p class="ar" style="font-size:15px; margin-top:6px;">المحتوى اللي بنجهزه — الأولوية لباقي مواد السنة الأولى</p>
+  </div>
+  <div class="roadmap">
+    <div class="card">
+      <span class="tag">Question bank</span>
+      <h3>Past exam questions</h3>
+      <p>Organized by subject, with a short explanation for each answer.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Organization</span>
+      <h3>Editable study schedule</h3>
+      <p>For spreading subjects across the weeks before an exam.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Community</span>
+      <h3>Q&amp;A with senior students</h3>
+      <p>A space to ask the questions that didn't get answered in lecture.</p>
+    </div>
+  </div>
+</section>
+
+<div id="subscribe" class="subscribe">
+  <div>
+    <h3>Want to know when new subjects go live?</h3>
+    <p>Message us on WhatsApp and we'll let you know as soon as we add new material.</p>
+    <p class="ar" style="font-size:14px; margin-top:8px;">تواصل معانا على واتساب وهنبعتلك أول ما نضيف مادة جديدة</p>
+  </div>
+  <a class="btn btn-primary" href="https://wa.me/201121366928">Message on WhatsApp</a>
+</div>
+
+<footer>
+  <span>MedPath — built by a med student, for med students <span class="ar">(صنعها طالب طب لطلاب طب)</span></span>
+  <span>© 2026</span>
+</footer>
+
+</body>
+</html>
